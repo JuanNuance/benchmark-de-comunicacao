@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package faker;
+
+service FakerStream {
+  rpc StreamData (StreamRequest) returns (stream DataPacket);
+  rpc GetMetrics (MetricsRequest) returns (MetricsResponse);
+}
+
+message StreamRequest {
+  int32 duration_seconds = 1;
+}
+
+message DataPacket {
+  string name = 1;
+  string email = 2;
+  string address = 3;
+  string phone = 4;
+  string company = 5;
+  string job = 6;
+  string text = 7;
+  double latency_us = 8;
+  int64 packet_number = 9;
+}
+
+message MetricsRequest {}
+
+message MetricsResponse {
+  int64 total_packets_sent = 1;
+  double avg_latency_us = 2;
+  double max_latency_us = 3;
+  double min_latency_us = 4;
+  int64 bytes_sent = 5;
+  double packets_per_second = 6;
+  double mb_per_second = 7;
+  double tcp_time_complexity = 8;
+  string complexity_class = 9;
+}
